@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="public/assets/mmtv_logo.png" alt="MicroMac Techno Valley Ltd Logo" width="250" />
+  <img src="public/assets/mmtv_logo.png" alt="MicroMac Techno Valley Ltd Logo" width="150" />
   <h1>Assessment of Standard Coding</h1>
   <p>
     <strong>A highly robust Brand → Model → Item inventory manager.</strong>
