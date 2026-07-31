@@ -30,11 +30,7 @@
                             </td>
                             <td class="text-center border border-gray-200">
                                 <button onclick="openEditModal({{ $brand->id }}, '{{ addslashes($brand->name) }}')" class="btn btn-sm border-2 border-[#f59e0b]/50 hover:bg-yellow-600 text-black px-2" title="Edit">📝</button>
-                                <form action="{{ route('brands.destroy', $brand->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Are you sure you want to delete this brand?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm border-2 border-[#ef4444]/50 hover:bg-red-700 text-black px-2" title="Delete">🗑️</button>
-                                </form>
+                                <button onclick="openDeleteModal('{{ route('brands.destroy', $brand->id) }}')" class="btn btn-sm border-2 border-[#ef4444]/50 hover:bg-red-700 text-black px-2" title="Delete">🗑️</button>
                             </td>
                         </tr>
                         @empty
@@ -131,6 +127,28 @@
     </div>
 </dialog>
 
+<!-- Delete Confirmation Modal -->
+<dialog id="delete_confirm_modal" class="modal backdrop-blur-lg bg-black/10">
+    <div class="modal-box max-w-sm rounded-lg border border-white/40 shadow-2xl bg-white text-center">
+        <h3 class="font-bold text-lg text-[#ef4444] mb-4">Confirm Deletion</h3>
+        <p class="text-sm text-gray-700 mb-6">Are you sure you want to delete this brand? This action cannot be undone.</p>
+        
+        <div class="flex justify-center gap-4">
+            <form method="dialog">
+                <button class="btn btn-sm bg-gray-200 hover:bg-gray-300 text-black border-none px-6">Cancel</button>
+            </form>
+            <form id="deleteForm" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-sm bg-[#ef4444] hover:bg-red-700 text-white border-none px-6">Yes, Delete</button>
+            </form>
+        </div>
+    </div>
+    <form method="dialog" class="modal-backdrop">
+        <button class="cursor-default">close</button>
+    </form>
+</dialog>
+
 <script>
     const brands = @json($brands);
 
@@ -179,6 +197,14 @@
         form.action = `/brands/${id}`;
         nameInput.dataset.original = name; // store original name to ignore duplicate check for itself
 
+        modal.showModal();
+    }
+
+    function openDeleteModal(actionUrl) {
+        const modal = document.getElementById('delete_confirm_modal');
+        const form = document.getElementById('deleteForm');
+        
+        form.action = actionUrl;
         modal.showModal();
     }
 
