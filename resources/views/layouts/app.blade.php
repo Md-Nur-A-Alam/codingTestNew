@@ -26,7 +26,7 @@
         <div class="navbar bg-white/60 backdrop-blur-md rounded-2xl mb-8 shadow-sm border border-gray-100 px-4">
             <div class="navbar-start">
                 <a href="{{ route('brands.index') }}" class="btn btn-ghost h-auto py-2 hover:scale-105 transition-transform duration-300 px-2">
-                    <img src="{{ asset('assets/mmtv_icon.png') }}" alt="MMTV Logo" class="h-12 sm:h-15 w-auto drop-shadow-sm" />
+                    <img src="{{ asset('assets/mmtv_logo.png') }}" alt="MMTV Logo" class="h-12 sm:h-15 w-auto drop-shadow-sm" />
                 </a>
             </div>
             <div class="navbar-center flex flex-col items-center justify-center text-center hidden lg:flex">
