@@ -5,19 +5,21 @@
     <div class="max-w-7xl mx-auto">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
 
-            <div class="flex justify-between items-center mb-4">
+            <div class="flex justify-between items-center mb-6">
                 <h2 class="text-2xl font-bold text-gray-800 border-l-4 border-[#EE2726] pl-3">Brand List</h2>
-                <button class="btn bg-[#EE2726] text-white border-none hover:bg-red-700 hover:border-none px-5" onclick="add_brand_modal.showModal()">+ Add Brand</button>
+                <button class="btn bg-[#EE2726] text-white border-none hover:bg-red-700 hover:border-none px-6 shadow-md shadow-red-500/30 hover:-translate-y-0.5 transition-all duration-300 rounded-lg" onclick="add_brand_modal.showModal()">
+                    <span class="text-lg mr-1">+</span> Add Brand
+                </button>
             </div>
 
             <div class="overflow-x-auto rounded-box border border-gray-200 shadow-sm">
                 <table class="table table-zebra w-full border-collapse">
                     <thead class="bg-[#EE2726] text-white text-base">
                         <tr>
-                            <th class="w-16 border border-gray-200">SL</th>
-                            <th class="border border-gray-200">Name</th>
-                            <th class="text-center w-48 border border-gray-200">Entry Date</th>
-                            <th class="text-center w-32 border border-gray-200">Action</th>
+                            <th class="w-16 border border-red-800/20 font-semibold tracking-wide">SL</th>
+                            <th class="border border-red-800/20 font-semibold tracking-wide">Brand Name</th>
+                            <th class="text-center w-48 border border-red-800/20 font-semibold tracking-wide">Entry Date</th>
+                            <th class="text-center w-32 border border-red-800/20 font-semibold tracking-wide">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -132,7 +134,7 @@
     <div class="modal-box max-w-sm rounded-lg border border-white/40 shadow-2xl bg-white text-center">
         <h3 class="font-bold text-lg text-[#ef4444] mb-4">Confirm Deletion</h3>
         <p class="text-sm text-gray-700 mb-6">Are you sure you want to delete this brand? This action cannot be undone.</p>
-        
+
         <div class="flex justify-center gap-4">
             <form method="dialog">
                 <button class="btn btn-sm bg-gray-200 hover:bg-gray-300 text-black border-none px-6">Cancel</button>
@@ -203,7 +205,7 @@
     function openDeleteModal(actionUrl) {
         const modal = document.getElementById('delete_confirm_modal');
         const form = document.getElementById('deleteForm');
-        
+
         form.action = actionUrl;
         modal.showModal();
     }

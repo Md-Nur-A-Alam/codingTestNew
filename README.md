@@ -1,59 +1,49 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Inventory Management System - Coding Standard Assessment
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Overview
+This project is a modern, responsive, and robust **Brand → Model → Item** inventory management web application. It was built as part of a coding standard assessment to demonstrate proficiency in database relationship management, MVC architectural patterns, and frontend/backend validation logic.
 
-## About Laravel
+The application allows users to manage a hierarchical inventory structure where:
+- A **Brand** can have many **Models**.
+- A **Model** can have many **Items**.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Users can perform full CRUD (Create, Read, Update, Delete) operations on each tier using dynamic, non-blocking modal interfaces rather than traditional multi-page forms.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Technology Stack
 
-## Learning Laravel
+### Backend
+- **Framework:** Laravel (PHP)
+- **Database:** MySQL
+- **Querying:** Laravel DB Facade (Raw SQL queries for optimized execution as per constraints)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### Frontend
+- **Templating:** Laravel Blade
+- **Styling:** Tailwind CSS (for rapid, utility-first premium styling)
+- **UI Components:** DaisyUI (for pre-built, accessible modal and button components)
+- **Interactivity:** Vanilla JavaScript (ES6)
+- **Notifications:** Toastify.js (for sleek, non-blocking flash messages)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## Key Techniques & Features
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 1. Robust Data Integrity (Dependent Dropdowns)
+To prevent orphaned or impossible data combinations, the application enforces strict relational logic on the frontend. When adding an **Item**, the "Model" dropdown remains empty until a "Brand" is selected. Once selected, JavaScript dynamically filters the models to only show those belonging to the chosen brand.
 
-### Premium Partners
+### 2. Dual-Layer Validation
+Security and data integrity are prioritized through a two-step validation process:
+- **Client-Side (JavaScript):** Intercepts form submissions to check for empty fields, maximum string lengths, alphanumeric-only characters, and duplicate entries. This provides instant feedback to the user without unnecessary server requests.
+- **Server-Side (Laravel):** The backend controllers re-validate all incoming requests (`$request->validate()`) to ensure malicious users cannot bypass the frontend checks.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 3. Modern UI/UX Architecture
+Instead of relying on jarring native browser alerts (`window.alert`) and prompts (`window.confirm`), the application utilizes:
+- **DaisyUI Modals:** For adding, editing, and confirming deletions. This keeps the user immersed in the application's design system.
+- **Toastify Notifications:** Success, warning, and error messages are pushed to the UI as auto-dismissing toast notifications that map directly to Laravel's backend Session Flash messages.
 
-## Contributing
+### 4. Smart Editing Logic
+When a user clicks "Edit" on any grid row, a JavaScript function intercepts the call and dynamically injects the row's existing data into the Edit Modal. For complex relational items (like the Item grid), it automatically pre-selects the correct Brand, triggers the dependent dropdown logic to fetch the models, and then pre-selects the correct Model seamlessly.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 5. Consistent Sorting Rules
+All data grids are strictly ordered by `entry_date DESC` with a fallback tiebreaker of `id DESC`. This guarantees that the most recently added or modified items always surface to the top of the list, providing a consistent and expected user experience across all modules.

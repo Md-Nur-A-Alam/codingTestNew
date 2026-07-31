@@ -19,21 +19,25 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </head>
 
-<body class="bg-base-200 min-h-screen p-6">
+<body class="bg-gradient-to-br from-gray-50 to-gray-200 min-h-screen p-4 sm:p-8 text-gray-800 antialiased font-sans">
 
-    <div class="max-w-6xl mx-auto bg-base-100 p-6 rounded-xl shadow-xl">
+    <div class="max-w-6xl mx-auto bg-white/80 backdrop-blur-xl p-6 sm:p-8 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/60">
         <!-- Navigation Bar using DaisyUI Navbar -->
-        <div class="navbar bg-base-200 rounded-box mb-6 shadow-sm">
-            <div class="flex-1">
-                <a href="{{ route('brands.index') }}" class="btn btn-ghost text-xl h-auto py-2">
-                    <img src="{{ asset('assets/mmtv_icon.png') }}" alt="MMTV Logo" class="h-15 w-auto" />
+        <div class="navbar bg-white/60 backdrop-blur-md rounded-2xl mb-8 shadow-sm border border-gray-100 px-4">
+            <div class="navbar-start">
+                <a href="{{ route('brands.index') }}" class="btn btn-ghost h-auto py-2 hover:scale-105 transition-transform duration-300 px-2">
+                    <img src="{{ asset('assets/mmtv_icon.png') }}" alt="MMTV Logo" class="h-12 sm:h-15 w-auto drop-shadow-sm" />
                 </a>
             </div>
-            <div class="flex-none">
-                <ul class="menu menu-horizontal px-1 gap-2">
-                    <li><a href="{{ route('brands.index') }}" class="{{ request()->routeIs('brands.index') ? 'active bg-[#EE2726] text-white' : '' }}">Brand</a></li>
-                    <li><a href="{{ route('models.index') }}" class="{{ request()->routeIs('models.index') ? 'active bg-[#EE2726] text-white' : '' }}">Model</a></li>
-                    <li><a href="{{ route('items.index') }}" class="{{ request()->routeIs('items.index') ? 'active bg-[#EE2726] text-white' : '' }}">Item</a></li>
+            <div class="navbar-center flex flex-col items-center justify-center text-center hidden lg:flex">
+                <h1 class="text-xl sm:text-2xl font-extrabold text-gray-900 tracking-tight leading-tight">MicroMac Techno Valley Ltd.</h1>
+                <h2 class="text-xs sm:text-sm font-medium text-gray-500 tracking-wide mt-0.5">Assessment of Standard Coding</h2>
+            </div>
+            <div class="navbar-end">
+                <ul class="menu menu-horizontal px-1 gap-1 sm:gap-2 font-medium">
+                    <li><a href="{{ route('brands.index') }}" class="{{ request()->routeIs('brands.index') ? 'active bg-[#EE2726] text-white shadow-md shadow-red-500/20' : 'hover:bg-red-50 hover:text-[#EE2726] transition-colors' }}">Brand</a></li>
+                    <li><a href="{{ route('models.index') }}" class="{{ request()->routeIs('models.index') ? 'active bg-[#EE2726] text-white shadow-md shadow-red-500/20' : 'hover:bg-red-50 hover:text-[#EE2726] transition-colors' }}">Model</a></li>
+                    <li><a href="{{ route('items.index') }}" class="{{ request()->routeIs('items.index') ? 'active bg-[#EE2726] text-white shadow-md shadow-red-500/20' : 'hover:bg-red-50 hover:text-[#EE2726] transition-colors' }}">Item</a></li>
                 </ul>
             </div>
         </div>
