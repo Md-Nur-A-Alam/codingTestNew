@@ -71,7 +71,7 @@
                     @csrf
                     <div class="flex items-center mb-1">
                         <label class="text-sm font-medium text-black w-32">Brand Name <span class="text-red-500 font-bold">*</span></label>
-                        <select name="brand_id" required class="select select-sm rounded-none border border-solid border-gray-600 w-full max-w-sm focus:outline-none focus:border-[#EE2726] focus:ring-1 focus:ring-[#EE2726] bg-white text-black font-normal">
+                        <select id="add_brand_id" name="brand_id" onchange="populateModels('add_brand_id', 'add_model_id')" required class="select select-sm rounded-none border border-solid border-gray-600 w-full max-w-sm focus:outline-none focus:border-[#EE2726] focus:ring-1 focus:ring-[#EE2726] bg-white text-black font-normal">
                             <option value="" disabled selected>Select a brand</option>
                             @foreach($brands as $brand)
                                 <option value="{{ $brand->id }}">{{ $brand->name }}</option>
@@ -84,11 +84,8 @@
                     
                     <div class="flex items-center mb-1">
                         <label class="text-sm font-medium text-black w-32">Model Name <span class="text-red-500 font-bold">*</span></label>
-                        <select name="model_id" required class="select select-sm rounded-none border border-solid border-gray-600 w-full max-w-sm focus:outline-none focus:border-[#EE2726] focus:ring-1 focus:ring-[#EE2726] bg-white text-black font-normal">
+                        <select id="add_model_id" name="model_id" required class="select select-sm rounded-none border border-solid border-gray-600 w-full max-w-sm focus:outline-none focus:border-[#EE2726] focus:ring-1 focus:ring-[#EE2726] bg-white text-black font-normal">
                             <option value="" disabled selected>Select a model</option>
-                            @foreach($modelsList as $modelOption)
-                                <option value="{{ $modelOption->id }}">{{ $modelOption->name }}</option>
-                            @endforeach
                         </select>
                     </div>
                     <div class="flex pl-32 mb-2 min-h-[1.25rem]">
@@ -138,7 +135,7 @@
                     @method('PUT')
                     <div class="flex items-center mb-1">
                         <label class="text-sm font-medium text-black w-32">Brand Name <span class="text-red-500 font-bold">*</span></label>
-                        <select id="edit_brand_id" name="brand_id" required class="select select-sm rounded-none border border-solid border-gray-600 w-full max-w-sm focus:outline-none focus:border-[#f59e0b] focus:ring-1 focus:ring-[#f59e0b] bg-white text-black font-normal">
+                        <select id="edit_brand_id" name="brand_id" onchange="populateModels('edit_brand_id', 'edit_model_id')" required class="select select-sm rounded-none border border-solid border-gray-600 w-full max-w-sm focus:outline-none focus:border-[#f59e0b] focus:ring-1 focus:ring-[#f59e0b] bg-white text-black font-normal">
                             <option value="" disabled>Select a brand</option>
                             @foreach($brands as $brand)
                                 <option value="{{ $brand->id }}">{{ $brand->name }}</option>
@@ -153,9 +150,6 @@
                         <label class="text-sm font-medium text-black w-32">Model Name <span class="text-red-500 font-bold">*</span></label>
                         <select id="edit_model_id" name="model_id" required class="select select-sm rounded-none border border-solid border-gray-600 w-full max-w-sm focus:outline-none focus:border-[#f59e0b] focus:ring-1 focus:ring-[#f59e0b] bg-white text-black font-normal">
                             <option value="" disabled>Select a model</option>
-                            @foreach($modelsList as $modelOption)
-                                <option value="{{ $modelOption->id }}">{{ $modelOption->name }}</option>
-                            @endforeach
                         </select>
                     </div>
                     <div class="flex pl-32 mb-2 min-h-[1.25rem]">
@@ -207,6 +201,31 @@
 
     <script>
         const items_display = @json($items_display);
+        const modelsList = @json($modelsList);
+
+        function populateModels(brandSelectId, modelSelectId, selectedModelId = null) {
+            const brandId = document.getElementById(brandSelectId).value;
+            const modelSelect = document.getElementById(modelSelectId);
+            
+            // Clear current options
+            modelSelect.innerHTML = '<option value="" disabled selected>Select a model</option>';
+            
+            if (!brandId) return;
+
+            // Filter models based on brand
+            const filteredModels = modelsList.filter(model => model.brand_id == brandId);
+            
+            // Populate
+            filteredModels.forEach(model => {
+                const option = document.createElement('option');
+                option.value = model.id;
+                option.textContent = model.name;
+                if (selectedModelId && model.id == selectedModelId) {
+                    option.selected = true;
+                }
+                modelSelect.appendChild(option);
+            });
+        }
 
         function openEditModal(id, brand_id, model_id, name) {
             const modal = document.getElementById('edit_item_modal');
@@ -218,7 +237,7 @@
             // Set values
             nameInput.value = name;
             brandSelect.value = brand_id;
-            modelSelect.value = model_id;
+            populateModels('edit_brand_id', 'edit_model_id', model_id);
             form.action = `/items/${id}`;
             nameInput.dataset.original = name; 
 
