@@ -69,13 +69,12 @@ Copy the `.env.example` file to create a new `.env` file, then generate the appl
 cp .env.example .env
 php artisan key:generate
 ```
-*Note: Make sure to update your `.env` file with your local MySQL database credentials (e.g., `DB_DATABASE=inventory_db`).*
+*Note: Make sure to update your `.env` file with your local MySQL database credentials.*
 
-**4. Run Migrations**
-This will automatically generate the `brand`, `models`, and `items` tables with the exact schema constraints required.
-```bash
-php artisan migrate
-```
+**4. Import the Database**
+A complete database dump (`codingtestmmtv.sql`) has been provided in the root directory.
+Import this file into your MySQL database to instantly load the required schema and sample data.
+*(Alternatively, you can run `php artisan migrate` if you prefer an empty schema).*
 
 **5. Start the Development Server**
 ```bash
@@ -89,18 +88,33 @@ The application will now be running at `http://localhost:8000`. *(Note: Tailwind
 
 <table>
   <tr>
+<<<<<<< HEAD
     <td width="50%" align="center" valign="top">
+=======
+    <td width="33%" align="center" valign="top">
+>>>>>>> 171c42e (added the database file also)
       <b>1. The Brand Dashboard</b><br/>
       <i>A clean, data-dense grid featuring strict sorting rules.</i><br/><br/>
       <img src="public/assets/brandPage.png" alt="Brand Page" width="100%" />
     </td>
+<<<<<<< HEAD
     <td width="50%" align="center" valign="top">
       <b>2. The Item Dashboard</b><br/>
+=======
+    <td width="33%" align="center" valign="top">
+      <b>2. The Model Dashboard</b><br/>
+      <i>Organizing models relationally under specific brands.</i><br/><br/>
+      <img src="public/assets/modelPage.png" alt="Model Page" width="100%" />
+    </td>
+    <td width="33%" align="center" valign="top">
+      <b>3. The Item Dashboard</b><br/>
+>>>>>>> 171c42e (added the database file also)
       <i>Showcasing a multi-relational display joining all tables securely.</i><br/><br/>
       <img src="public/assets/itemPage.png" alt="Item Page" width="100%" />
     </td>
   </tr>
   <tr>
+<<<<<<< HEAD
     <td width="50%" align="center" valign="top">
       <b>3. Add Item (Dependent Dropdowns)</b><br/>
       <i>Models filter dynamically based on the selected Brand.</i><br/><br/>
@@ -117,6 +131,22 @@ The application will now be running at `http://localhost:8000`. *(Note: Tailwind
       <b>5. Toast Notifications</b><br/>
       <i>Sleek, non-blocking UI feedback.</i><br/><br/>
       <img src="public/assets/toast message.png" alt="Toast" width="50%" />
+=======
+    <td width="33%" align="center" valign="top">
+      <b>4. Add Item (Dependent Dropdowns)</b><br/>
+      <i>Models filter dynamically based on the selected Brand.</i><br/><br/>
+      <img src="public/assets/add item.png" alt="Add Item" width="100%" />
+    </td>
+    <td width="33%" align="center" valign="top">
+      <b>5. Smart Edit Modal</b><br/>
+      <i>Values map to inputs instantly without losing relational context.</i><br/><br/>
+      <img src="public/assets/modelEdit_modal.png" alt="Edit Modal" width="100%" />
+    </td>
+    <td width="33%" align="center" valign="top">
+      <b>6. Toast Notifications</b><br/>
+      <i>Sleek, non-blocking UI feedback.</i><br/><br/>
+      <img src="public/assets/toast message.png" alt="Toast" width="100%" />
+>>>>>>> 171c42e (added the database file also)
     </td>
   </tr>
 </table>
