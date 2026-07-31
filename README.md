@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="public/assets/mmtv_logo.png" alt="MicroMac Techno Valley Ltd Logo" width="150" />
+  <img src="public/assets/mmtv_logo.png" alt="MicroMac Techno Valley Ltd Logo" width="100" />
   <h1>Assessment of Standard Coding</h1>
   <p>
     <strong>A highly robust Brand → Model → Item inventory manager.</strong>
@@ -50,25 +50,39 @@ The purpose of this project is to fulfill the requirements of the "Standard Codi
 
 ## 📸 Interface Previews
 
-### 1. The Brand Dashboard
-*A clean, data-dense grid featuring strict sorting rules.*
-<img src="public/assets/brandPage.png" alt="Brand Page Screenshot" width="100%" />
-
-### 2. The Item Dashboard
-*Showcasing a multi-relational display joining the Item, Model, and Brand tables securely.*
-<img src="public/assets/itemPage.png" alt="Item Page Screenshot" width="100%" />
-
-### 3. Add Item (Dependent Dropdowns)
-*Models filter dynamically based on the selected Brand.*
-<img src="public/assets/add item.png" alt="Add Item Modal" width="100%" />
-
-### 4. Smart Edit Modal
-*Values automatically map to the inputs without losing context.*
-<img src="public/assets/modelEdit_modal.png" alt="Edit Modal" width="100%" />
-
-### 5. Toast Notifications
-*Non-blocking UI feedback.*
-<img src="public/assets/toast message.png" alt="Toast Notification" width="100%" />
+<table>
+  <tr>
+    <td width="50%" align="center" valign="top">
+      <b>1. The Brand Dashboard</b><br/>
+      <i>A clean, data-dense grid featuring strict sorting rules.</i><br/><br/>
+      <img src="public/assets/brandPage.png" alt="Brand Page" width="100%" />
+    </td>
+    <td width="50%" align="center" valign="top">
+      <b>2. The Item Dashboard</b><br/>
+      <i>Showcasing a multi-relational display joining all tables securely.</i><br/><br/>
+      <img src="public/assets/itemPage.png" alt="Item Page" width="100%" />
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center" valign="top">
+      <b>3. Add Item (Dependent Dropdowns)</b><br/>
+      <i>Models filter dynamically based on the selected Brand.</i><br/><br/>
+      <img src="public/assets/add item.png" alt="Add Item" width="100%" />
+    </td>
+    <td width="50%" align="center" valign="top">
+      <b>4. Smart Edit Modal</b><br/>
+      <i>Values map to inputs instantly without losing relational context.</i><br/><br/>
+      <img src="public/assets/modelEdit_modal.png" alt="Edit Modal" width="100%" />
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center" valign="top">
+      <b>5. Toast Notifications</b><br/>
+      <i>Sleek, non-blocking UI feedback.</i><br/><br/>
+      <img src="public/assets/toast message.png" alt="Toast" width="50%" />
+    </td>
+  </tr>
+</table>
 
 ---
 
