@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="public/assets/mmtv_logo.png" alt="MicroMac Techno Valley Ltd Logo" width="100" />
+  <img src="public/assets/mmtv_logo.png" alt="MicroMac Techno Valley Ltd Logo" width="120" />
   <h1>Assessment of Standard Coding</h1>
   <p>
     <strong>A highly robust Brand → Model → Item inventory manager.</strong>
@@ -45,6 +45,43 @@ The purpose of this project is to fulfill the requirements of the "Standard Codi
 - **UI Components:** DaisyUI for pre-built, highly accessible modal and button components.
 - **Interactivity:** Vanilla JavaScript (ES6) for DOM manipulation, dependent dropdowns, and form validation.
 - **Notifications:** Toastify.js for sleek, non-blocking flash messages.
+
+---
+
+## 🚀 Installation & Setup
+
+Follow these steps to get the project running on your local machine:
+
+**1. Clone the repository**
+```bash
+git clone https://github.com/Md-Nur-A-Alam/your-repo-name.git
+cd your-repo-name
+```
+
+**2. Install PHP Dependencies**
+```bash
+composer install
+```
+
+**3. Environment Setup**
+Copy the `.env.example` file to create a new `.env` file, then generate the application key.
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+*Note: Make sure to update your `.env` file with your local MySQL database credentials (e.g., `DB_DATABASE=inventory_db`).*
+
+**4. Run Migrations**
+This will automatically generate the `brand`, `models`, and `items` tables with the exact schema constraints required.
+```bash
+php artisan migrate
+```
+
+**5. Start the Development Server**
+```bash
+php artisan serve
+```
+The application will now be running at `http://localhost:8000`. *(Note: Tailwind CSS and DaisyUI are served via CDN for this assessment, so no `npm install` is required!)*
 
 ---
 
