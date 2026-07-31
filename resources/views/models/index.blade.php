@@ -15,18 +15,18 @@
                         <thead class="bg-[#EE2726] text-white text-base">
                             <tr>
                                 <th class="w-16 border border-gray-200">SL</th>
-                                <th class="border border-gray-200">Brand ID</th>
+                                <th class="border border-gray-200">Brand Name</th>
                                 <th class="border border-gray-200">Model Name</th>
                                 <th class="text-center w-48 border border-gray-200">Entry Date</th>
                                 <th class="text-center w-32 border border-gray-200">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($models as $index => $model)
+                            @forelse($models_display as $index => $model)
                                 <tr class="even:bg-gray-100 hover:bg-[#FEE5E5] transition-colors duration-200">
                                     <th class="border border-gray-200">{{ $index + 1 }}</th>
-                                    <td class="border border-gray-200 font-medium">{{ $model->brand_id }}</td>
-                                    <td class="border border-gray-200 font-medium">{{ $model->name }}</td>
+                                    <td class="border border-gray-200 font-medium">{{ $model->brand_name }}</td>
+                                    <td class="border border-gray-200 font-medium">{{ $model->model_name }}</td>
                                     <td class="text-center border border-gray-200">
                                         {{ \Carbon\Carbon::parse($model->entry_date)->format('M d, Y') }}
                                     </td>
@@ -68,8 +68,13 @@
                 <form method="POST" action="#">
                     @csrf
                     <div class="flex items-center mb-6">
-                        <label class="text-sm font-medium text-black w-32">Brand ID <span class="text-red-500 font-bold">*</span></label>
-                        <input type="number" name="brand_id" required class="input input-sm rounded-none border border-solid border-gray-600 w-full max-w-sm focus:outline-none focus:border-[#EE2726] focus:ring-1 focus:ring-[#EE2726] bg-white text-black" />
+                        <label class="text-sm font-medium text-black w-32">Brand Name <span class="text-red-500 font-bold">*</span></label>
+                        <select name="brand_id" required class="select select-sm rounded-none border border-solid border-gray-600 w-full max-w-sm focus:outline-none focus:border-[#EE2726] focus:ring-1 focus:ring-[#EE2726] bg-white text-black font-normal">
+                            <option value="" disabled selected>Select a brand</option>
+                            @foreach($brands as $brand)
+                                <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     
                     <div class="flex items-center mb-6">
