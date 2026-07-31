@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('layouts.app');
 // });
 Route::get('/', [BrandController::class, 'index'])->name('brands.index');
+Route::post('/brands', [BrandController::class, 'store'])->name('brands.store');
 
 Route::get('/models', [ModelsController::class, 'index'])->name('models.index');
 

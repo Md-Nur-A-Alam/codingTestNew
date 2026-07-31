@@ -63,11 +63,14 @@
                 
                 <hr class="border-t border-dashed border-gray-500 mb-6">
                 
-                <form method="POST" action="#">
+                <form id="addBrandForm">
                     @csrf
-                    <div class="flex items-center mb-6">
+                    <div class="flex items-center mb-1">
                         <label class="text-sm font-medium text-black w-32">Brand Name <span class="text-red-500 font-bold">*</span></label>
-                        <input type="text" name="name" required class="input input-sm rounded-none border border-solid border-gray-600 w-full max-w-sm focus:outline-none focus:border-[#EE2726] focus:ring-1 focus:ring-[#EE2726] bg-white text-black" />
+                        <input type="text" name="name" class="input input-sm rounded-none border border-solid border-gray-600 w-full max-w-sm focus:outline-none focus:border-[#EE2726] focus:ring-1 focus:ring-[#EE2726] bg-white text-black" />
+                    </div>
+                    <div class="flex pl-32 mb-4 min-h-[1.25rem]">
+                        <span id="errorMessage" class="text-red-500 text-sm font-medium"></span>
                     </div>
                     
                     <div class="flex pl-32">
@@ -82,4 +85,68 @@
             </form>
         </div>
     </dialog>
+
+    <script>
+        const brands = @json($brands);
+        
+        document.getElementById('addBrandForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nameInput = document.querySelector('input[name="name"]');
+            const name = nameInput.value.trim();
+            const errorElement = document.getElementById('errorMessage');
+            errorElement.textContent = '';
+            
+            // Validation
+            if (!name) {
+                errorElement.textContent = 'Brand name is mandatory';
+                return;
+            }
+            if (name.length > 50) {
+                errorElement.textContent = 'the input should less then 50 char.';
+                return;
+            }
+            if (!/^[a-zA-Z0-9_-]+$/.test(name)) {
+                errorElement.textContent = 'Brand name can only allow alphanumeric characters, "_", "-"';
+                return;
+            }
+            const isDuplicate = brands.some(b => b.name.toLowerCase() === name.toLowerCase());
+            if (isDuplicate) {
+                errorElement.textContent = 'Duplicate brand name will not be allowed';
+                return;
+            }
+            
+            // AJAX Submit
+            fetch("{{ route('brands.store') }}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+                },
+                body: JSON.stringify({ name: name })
+            })
+            .then(async response => {
+                if (!response.ok) {
+                    if (response.status === 422) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.errors.name[0]);
+                    }
+                    throw new Error('An error occurred while adding the brand.');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    alert('Brand has been added successfully');
+                    document.getElementById('add_brand_modal').close();
+                    window.location.href = "{{ route('brands.index') }}";
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                errorElement.textContent = error.message;
+            });
+        });
+    </script>
 @endsection
