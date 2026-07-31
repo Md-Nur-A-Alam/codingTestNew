@@ -11,7 +11,12 @@
 
     <!-- DaisyUI CDN -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    
+    <!-- Toastify JS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </head>
 
 <body class="bg-base-200 min-h-screen p-6">
@@ -32,10 +37,41 @@
                 </ul>
             </div>
         </div>
-        @if(session('success'))
         <script>
-            alert("{{ session('success') }}");
+            window.showToast = function(message, type = 'success') {
+                let bgColor = "#10b981"; // success green
+                if (type === 'danger' || type === 'error') {
+                    bgColor = "#ef4444"; // error red
+                } else if (type === 'warning') {
+                    bgColor = "#f59e0b"; // warning orange
+                } else if (type === 'info') {
+                    bgColor = "#3b82f6"; // info blue
+                }
+
+                Toastify({
+                    text: message,
+                    duration: 3000,
+                    close: true,
+                    gravity: "top",
+                    position: "right",
+                    style: {
+                        background: bgColor,
+                        color: "white",
+                        borderRadius: "8px",
+                        boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)"
+                    }
+                }).showToast();
+            };
         </script>
+
+        @if(session('success'))
+            <script>showToast("{!! session('success') !!}", "success");</script>
+        @endif
+        @if(session('error'))
+            <script>showToast("{!! session('error') !!}", "danger");</script>
+        @endif
+        @if(session('warning'))
+            <script>showToast("{!! session('warning') !!}", "warning");</script>
         @endif
 
         @yield('content')

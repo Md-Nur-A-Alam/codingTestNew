@@ -138,9 +138,13 @@
             })
             .then(data => {
                 if (data.success) {
-                    alert('Brand has been added successfully');
+                    showToast('Brand has been added successfully', 'success');
+
                     document.getElementById('add_brand_modal').close();
-                    window.location.href = "{{ route('brands.index') }}";
+                    
+                    setTimeout(() => {
+                        window.location.href = "{{ route('brands.index') }}";
+                    }, 1000); // give the user 1 second to see the toast before reload
                 }
             })
             .catch(error => {
