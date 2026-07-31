@@ -11,7 +11,7 @@ class BrandController extends Controller
     //
     public function index()
     {
-        $brands = DB::select('SELECT * FROM brand ORDER BY id DESC');
+        $brands = DB::select('SELECT * FROM brand ORDER BY entry_date DESC, id DESC');
         return view('brands.index', compact('brands'));
     }
 

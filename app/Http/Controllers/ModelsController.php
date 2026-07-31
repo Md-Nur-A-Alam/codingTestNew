@@ -17,7 +17,7 @@ class ModelsController extends Controller
                                     t1.entry_date
                                 FROM `models` as t1
                                 JOIN `brand` as t2 ON t1.brand_id=t2.id
-                                ORDER BY t1.id DESC;'
+                                ORDER BY t1.entry_date DESC, t1.id DESC;'
                                 );
         $brands = DB::select('SELECT id, name FROM brand ORDER BY name ASC');
         return view('models.index', compact('models_display', 'brands'));

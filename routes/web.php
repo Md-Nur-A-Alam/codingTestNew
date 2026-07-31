@@ -19,3 +19,6 @@ Route::put('/models/{id}', [ModelsController::class, 'update'])->name('models.up
 Route::delete('/models/{id}', [ModelsController::class, 'destroy'])->name('models.destroy');
 
 Route::get('/items', [ItemController::class, 'index'])->name('items.index');
+Route::post('/items', [ItemController::class, 'store'])->name('items.store');
+Route::put('/items/{id}', [ItemController::class, 'update'])->name('items.update');
+Route::delete('/items/{id}', [ItemController::class, 'destroy'])->name('items.destroy');
