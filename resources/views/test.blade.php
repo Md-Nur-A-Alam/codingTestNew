@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>codingTest</title>
+    <title>Document</title>
 </head>
 <body>
-    Hello coding test.
+    this is a test {{ 1 + 1 }};
 </body>
 </html>
