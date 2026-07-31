@@ -26,6 +26,26 @@ class BrandController extends Controller
             now()
         ]);
 
-        return response()->json(['success' => true]);
+        return redirect()->route('brands.index')->with('success', 'Brand added successfully');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:50',
+        ]);
+
+        DB::update('UPDATE brand SET name = ? WHERE id = ?', [
+            $request->name,
+            $id
+        ]);
+
+        return redirect()->route('brands.index')->with('warning', 'Brand updated successfully');
+    }
+
+    public function destroy($id)
+    {
+        DB::delete('DELETE FROM brand WHERE id = ?', [$id]);
+        return redirect()->route('brands.index')->with('error', 'Brand deleted successfully');
     }
 }
