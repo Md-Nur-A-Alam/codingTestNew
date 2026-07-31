@@ -20,13 +20,15 @@
         <!-- Navigation Bar using DaisyUI Navbar -->
         <div class="navbar bg-base-200 rounded-box mb-6 shadow-sm">
             <div class="flex-1">
-                <a class="btn btn-ghost text-xl">MicroMac_CodingTest </a>
+                <a href="{{ route('brands.index') }}" class="btn btn-ghost text-xl h-auto py-2">
+                    <img src="{{ asset('assets/mmtv_icon.png') }}" alt="MMTV Logo" class="h-15 w-auto" />
+                </a>
             </div>
             <div class="flex-none">
                 <ul class="menu menu-horizontal px-1 gap-2">
-                    <li><a href="{{ route('brands.index') }}" class="{{ request()->routeIs('brands.index') ? 'active bg-primary text-primary-content' : '' }}">Brand</a></li>
-                    <li><a href="{{ route('models.index') }}" class="{{ request()->routeIs('models.index') ? 'active bg-primary text-primary-content' : '' }}">Model</a></li>
-                    <li><a href="{{ route('items.index') }}" class="{{ request()->routeIs('items.index') ? 'active bg-primary text-primary-content' : '' }}">Item</a></li>
+                    <li><a href="{{ route('brands.index') }}" class="{{ request()->routeIs('brands.index') ? 'active bg-[#EE2726] text-white' : '' }}">Brand</a></li>
+                    <li><a href="{{ route('models.index') }}" class="{{ request()->routeIs('models.index') ? 'active bg-[#EE2726] text-white' : '' }}">Model</a></li>
+                    <li><a href="{{ route('items.index') }}" class="{{ request()->routeIs('items.index') ? 'active bg-[#EE2726] text-white' : '' }}">Item</a></li>
                 </ul>
             </div>
         </div>
